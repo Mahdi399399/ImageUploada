@@ -1,0 +1,19 @@
+
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>All books</h1>
+{% for book in object_list %}
+<ul>
+<li>image: {{ image.image }}</li>
+
+</ul>
+{% endfor %}
+
+</body>
+</html>

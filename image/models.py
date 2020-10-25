@@ -8,7 +8,20 @@ from django.urls import reverse
 class Image(models.Model):
     title = models.CharField(max_length=200)
     image = models.ImageField(upload_to='users/%Y/%m/%d/', blank=True)
-  # '''users/%Y/%m/%d/'''
-'''def get_absolute_url(self):  # new
 
-    return reverse('post_detail', args=[str(self.id)])'''
+
+
+
+
+
+
+
+
+
+
+
+
+
+    '''def get_absolute_url(self):  # new
+
+        return reverse('home', args=[str(self.id)])'''

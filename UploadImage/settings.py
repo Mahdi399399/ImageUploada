@@ -136,5 +136,5 @@ STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 
 ]
-TEMP = os.path.join(BASE_DIR, 'temp')
+#TEMP = os.path.join(BASE_DIR, 'temp')
 STATICFILES_DIRS=[os.path.join(BASE_DIR,'reactapp/build/static'),]

@@ -16,37 +16,39 @@ class ImageSerializer(serializers.ModelSerializer):
         model = Image
         fields = ('title','image')
 
-    def validate_image(self,Image):
-        image=Image['image']
-        url=os.path.join(settings.TEMP,str(image))
+    def validate_image(self,image):
+        url=os.path.join(settings.MEDIA_ROOT,image.name)
         storage=FileSystemStorage(location=url)
+
         with storage.open('','wb+') as destionation:
             for chunk in image.chunks():
                 destionation.write(chunk)
             destionation.close()
 
-        im=cv2.imread(url)
+        # im=cv2.imread(url)
 
-        text = "image"
-        if str(im).endswith(".jpg") or str(im).endswith(".png"):
+        is_blurry = False
+
 
 
 
             # load the image, convert it to grayscale, and compute the
             # focus measure of the image using the Variance of Laplacian
             # method
-            image = cv2.imread(cv2.samples.findFile(im), cv2.IMREAD_COLOR)
+        img = cv2.imread(url, cv2.IMREAD_COLOR)
             # image = cv2.GaussianBlur(image, (3, 3), 0)
             # image = cv2.imread(img)
-            gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-            fm = cv2.Laplacian(gray, cv2.CV_64F).var()
+        gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+        fm = cv2.Laplacian(gray, cv2.CV_64F).var()
 
             # if the focus measure is less than the supplied threshold,
             # then the image should be considered "blurry"
-            if fm < 1500:
-                text = "Blurry"
+        if fm < 1500:
+                is_blurry = True
             # show the image
-        return text
+        if is_blurry:
+            raise serializers.ValidationError("Image is blurry")
+        return image
 
 
     '''title = Image.title(validators=[

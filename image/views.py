@@ -42,7 +42,7 @@ class ImageView(ListCreateAPIView):
 
         return render(request, "myimages.html", {'form': form})'''
 
-    def create(self, request, *args, **kwargs):
+    '''def create(self, request, *args, **kwargs):
         response = super().create(request, *args, **kwargs)
         a=1
         if a==1:
@@ -55,14 +55,14 @@ class ImageView(ListCreateAPIView):
         else:
             return Response({
                 "a is not equal to 1"
-            })
+            })'''
 
-    def api_uploadimage(self,request):
+    '''def api_uploadimage(self,request):
         serializer=ImageSerializer(Image,data=request.data)
         data={}
         if serializer.is_valid():
             serializer.save()
-            data['response']=UPDATE_SUCCESS
+            data['response']=UPDATE_SUCCESS'''
 
 
 
